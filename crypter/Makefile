@@ -1,14 +1,26 @@
 CC = gcc
-CCFLAGS = -Wall 
+ENCRYPT_NAME = encrypt
+DECRYPT_NAME = decrypt
+TEST_NAME = test
+CCFLAGS = -Wall -Werror -pedantic -O3
+CFILES = run.c crypto.c
+HFILES = run.h crypto.h
+CTESTFILES = crypto.c testCrypto.c
 
-.PHONY: all clean
+.PHONY: all clean debug test
 
-all: cryption
+all: encryption decryption
 debug: CCFLAGS += -g
-debug: cryption
+debug: encryption decryption
 
-clean: 
+clean:
 	rm -f *.o *.exe
 
-cryption: crypto
-	$(CC) -o $(CCFLAGS) $^
+test: $(CTESTFILES)
+	$(CC) -o $(TEST_NAME) $^
+
+encryption: $(CFILES)
+	$(CC) -o $(ENCRYPT_NAME) $(CCFLAGS) $^
+
+decryption: $(CFILES)
+	$(CC) -o $(DECRYPT_NAME) $(CCFLAGS) $^
