@@ -1,10 +1,7 @@
 CC = gcc
-ENCRYPT_NAME = encrypt
-DECRYPT_NAME = decrypt
-TEST_NAME = test
 CCFLAGS = -Wall -Werror -pedantic -O3
-CFILES = run.c crypto.c
-HFILES = run.h crypto.h
+CFILES = main.c crypto.c
+HFILES = crypto.h
 CTESTFILES = crypto.c testCrypto.c
 
 .PHONY: all clean debug test
@@ -17,10 +14,10 @@ clean:
 	rm -f *.o *.exe
 
 test: $(CTESTFILES)
-	$(CC) -o $(TEST_NAME) $^
+	$(CC) -o test $^
 
 encryption: $(CFILES)
-	$(CC) -o $(ENCRYPT_NAME) $(CCFLAGS) $^
+	$(CC) -o encrypt $(CCFLAGS) $^
 
 decryption: $(CFILES)
-	$(CC) -o $(DECRYPT_NAME) $(CCFLAGS) $^
+	$(CC) -o decrypt $(CCFLAGS) $^
