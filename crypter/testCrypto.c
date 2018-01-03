@@ -4,3 +4,4 @@
 #include <stdio.h>
 #include <string.h>
 
+//TODO: alles machen
